@@ -1,0 +1,17 @@
+<!-- main/templates/main/payment_form.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Payment Form</title>
+</head>
+
+<body>
+    <h1>Payment for {{ payment.amount }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Pay Now</button>
+    </form>
+</body>
+
+</html>
