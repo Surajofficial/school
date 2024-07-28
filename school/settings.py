@@ -27,7 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['a.thestratify.com']
 
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://a.thestratify.com',
+]
 # Application definition
 
 INSTALLED_APPS = [
