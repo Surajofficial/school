@@ -15,17 +15,30 @@ class ParentAdmin(admin.ModelAdmin):
     actions = [generate_payment_link]
 
 
+class KidAdmin(admin.ModelAdmin):
+    list_display = ['parent_name', 'name',
+                    'school_name', 'roll_number', 'monthly_fees']
+
+    def parent_name(self, obj):
+        return obj.parent.user_name
+    parent_name.short_description = 'Parent Name'
+
+    def school_name(self, obj):
+        return obj.school.school_name
+    parent_name.short_description = 'Parent Name'
+
+
 class PaymentAdmin(admin.ModelAdmin):
     list_display = ('parent_name', 'parent_mobile', 'school_name',
                     'payment_status', 'paid_amount', 'payment_date', 'transaction_id')
     readonly_fields = ('parent_name', 'parent_mobile', 'school_name')
 
     def parent_name(self, obj):
-        return obj.parent.name
+        return obj.parent.user_name
     parent_name.short_description = 'Parent Name'
 
     def parent_mobile(self, obj):
-        return obj.parent.mobile_number
+        return obj.parent.user_mobile1
     parent_mobile.short_description = 'Parent Mobile'
 
     def school_name(self, obj):
@@ -37,4 +50,4 @@ admin.site.register(Payment, PaymentAdmin)
 
 admin.site.register(School)
 admin.site.register(Parent, ParentAdmin)
-admin.site.register(Kid)
+admin.site.register(Kid, KidAdmin)

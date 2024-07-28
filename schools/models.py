@@ -64,7 +64,7 @@ class Payment(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.kid.name} - {self.transaction_id}'
+        return f'{self.parent.user_name} - {self.transaction_id}'
 
 
 class Kid(models.Model):
