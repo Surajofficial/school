@@ -16,11 +16,25 @@ class ParentAdmin(admin.ModelAdmin):
 
 
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ['parent', 'amount',
-                    'status', 'created_date']
+    list_display = ('parent_name', 'parent_mobile', 'school_name',
+                    'payment_status', 'paid_amount', 'payment_date', 'transaction_id')
+    readonly_fields = ('parent_name', 'parent_mobile', 'school_name')
 
+    def parent_name(self, obj):
+        return obj.parent.name
+    parent_name.short_description = 'Parent Name'
+
+    def parent_mobile(self, obj):
+        return obj.parent.mobile_number
+    parent_mobile.short_description = 'Parent Mobile'
+
+    def school_name(self, obj):
+        return obj.school.school_name
+    school_name.short_description = 'School Name'
+
+
+admin.site.register(Payment, PaymentAdmin)
 
 admin.site.register(School)
 admin.site.register(Parent, ParentAdmin)
-admin.site.register(Payment)
 admin.site.register(Kid)
